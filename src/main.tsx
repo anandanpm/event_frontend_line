@@ -11,7 +11,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY||"pk_test_51Qll4sQYsYoxQv6c4onEzQTe1LgeSBRke8vF2cOfYMmojybtG08Sx3dAd1fObbDIXODeTlaVHXhtxPqudY9CsBg900c0fkb6SE")
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY)
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
