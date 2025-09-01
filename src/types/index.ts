@@ -1,4 +1,3 @@
-import { Key } from "react"
 
 export type Role = "user" | "organizer" | "admin"
 

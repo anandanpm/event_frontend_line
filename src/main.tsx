@@ -5,8 +5,6 @@ import { BrowserRouter } from "react-router-dom"
 import { store } from "./store"
 import App from "./App"
 import "./styles/main.scss"
-
-
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 

@@ -30,8 +30,8 @@ export default function EventCreate() {
           description: "",
           location: "",
           date: "",
-          capacity: 50, // default capacity
-          price: 10, // default price
+          capacity: 50, 
+          price: 10, 
         }}
         validationSchema={EventSchema}
         onSubmit={async (values, { setSubmitting }) => {

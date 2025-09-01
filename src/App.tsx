@@ -19,8 +19,6 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/events" element={<EventsList />} />
-
-          {/* 👇 Put /events/create BEFORE /events/:id */}
           <Route
             path="/events/create"
             element={

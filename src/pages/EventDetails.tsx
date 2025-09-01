@@ -51,7 +51,7 @@ useEffect(() => {
       console.error("Payment failed:", result.error.message)
       alert("Payment failed: " + result.error.message)
     } else {
-      // Instead of alert, redirect to success page
+
       navigate(`/payment/success?session_id=${result.paymentIntent?.id}`)
     }
   }
