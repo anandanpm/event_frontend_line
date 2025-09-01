@@ -16,14 +16,14 @@ const initialState: EventsState = {
   error: null,
 }
 
-// Fetch all events WITH tickets
+
 export const fetchEvents = createAsyncThunk<EventDTO[]>(
   "events/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
       const { data: events } = await api.get<EventDTO[]>("/events")
 
-      // fetch tickets for each event
+    
       const eventsWithTickets = await Promise.all(
         events.map(async (event) => {
           try {
@@ -32,7 +32,7 @@ export const fetchEvents = createAsyncThunk<EventDTO[]>(
             return { ...event, tickets }
             
           } catch {
-            // if no tickets or error, still return event
+
             return { ...event, tickets: [] }
           }
         })
@@ -45,7 +45,6 @@ export const fetchEvents = createAsyncThunk<EventDTO[]>(
   },
 )
 
-// Fetch one event (with tickets)
 export const fetchEventById = createAsyncThunk<EventDTO, string>(
   "events/fetchById",
   async (id, { rejectWithValue }) => {
@@ -76,7 +75,7 @@ export const createEvent = createAsyncThunk<EventDTO, CreateEventPayload>(
   "events/create",
   async (payload, { rejectWithValue }) => {
     try {
-      // Step 1: Create Event
+      
       const { data: event } = await api.post<EventDTO>("/events", {
         title: payload.title,
         description: payload.description,
@@ -84,14 +83,14 @@ export const createEvent = createAsyncThunk<EventDTO, CreateEventPayload>(
         date: payload.date,
       })
 
-      // Step 2: Create Default Ticket for this Event
+
       const { data: ticket } = await api.post<TicketDTO>(`/tickets/event/${event.id}`, {
         name: "General Admission",
         priceCents: Math.round(payload.price * 100),
         totalQuantity: payload.capacity,
       })
 
-      // Step 3: Attach the ticket to the event
+  
       return { ...event, tickets: [ticket] }
     } catch (err: any) {
       return rejectWithValue(err?.response?.data?.message || "Failed to create event & ticket")

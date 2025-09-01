@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import api, { setToken, clearToken, getToken } from "../../api/axios"
 import type { UserDTO, Role } from "../../types"
 
-// The backend response when logging in/registering
 export interface AuthResponse {
   token: string
   id: string
@@ -22,7 +21,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   user: null,
-  token: getToken(), // ✅ load token if already in localStorage
+  token: getToken(), 
   loading: false,
   error: null,
 }

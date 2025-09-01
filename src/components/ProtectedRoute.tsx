@@ -18,11 +18,11 @@ export default function ProtectedRoute({
     return <Navigate to="/login" replace state={{ from: location }} />
   }
 
-  // ✅ Normalize role check (lowercase)
+
   const userRole = (user.role || "").toLowerCase() as AllowedRole
 
   if (roles && !roles.includes(userRole)) {
-    // redirect to unauthorized instead of events
+
     return <Navigate to="/unauthorized" replace />
   }
 

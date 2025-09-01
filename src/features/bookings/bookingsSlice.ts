@@ -20,7 +20,7 @@ const initialState: BookingsState = {
   lastBooking: null,
 }
 
-// Fetch bookings for the logged-in user
+
 export const fetchMyBookings = createAsyncThunk<BookingDTO[], { userId: string }>(
   "bookings/fetchMine",
   async ({ userId }, { rejectWithValue }) => {
@@ -34,7 +34,7 @@ export const fetchMyBookings = createAsyncThunk<BookingDTO[], { userId: string }
 )
 
 
-// Create booking and get clientSecret
+
 export const createBooking = createAsyncThunk<
   BookingDTO,
   { userId: string; ticketId: string; quantity: number }
