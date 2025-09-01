@@ -1,12 +1,12 @@
 import axios from "axios"
 
-const baseURL = import.meta.env.VITE_API_URL || "http://localhost:4000/api"
+const baseURL = import.meta.env.VITE_API_URL 
 
 export const api = axios.create({
   baseURL,
 })
 
-// 🔑 Helpers for token management
+
 export function setToken(token: string) {
   localStorage.setItem("token", token)
 }
