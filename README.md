@@ -55,3 +55,8 @@ Development Tools
 
 Vite Plugin React: 4.3.1 - React support for Vite
 TypeScript Types: React and Router DOM type definitions
+
+
+Admin Details
+email:ananda@gmail.com
+password:Ananda@2001

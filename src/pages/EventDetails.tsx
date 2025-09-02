@@ -24,6 +24,7 @@ export default function EventDetails() {
   const tickets = useMemo(() => (id ? byEvent[id] || [] : []), [byEvent, id])
   const stripe = useStripe()
   const elements = useElements()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (id) {
@@ -32,33 +33,33 @@ export default function EventDetails() {
     }
   }, [dispatch, id])
 
+  useEffect(() => {
+    const handlePayment = async () => {
+      if (!stripe || !elements || !lastBooking?.clientSecret) return
 
+      const cardElement = elements.getElement(CardElement)
+      if (!cardElement) return
 
-const navigate = useNavigate()
+      try {
+        const result = await stripe.confirmCardPayment(lastBooking.clientSecret, {
+          payment_method: { card: cardElement },
+        })
 
-useEffect(() => {
-  const handlePayment = async () => {
-    if (!stripe || !elements || !lastBooking?.clientSecret) return
-
-    const cardElement = elements.getElement(CardElement)
-    if (!cardElement) return
-
-    const result = await stripe.confirmCardPayment(lastBooking.clientSecret, {
-      payment_method: { card: cardElement },
-    })
-
-    if (result.error) {
-      console.error("Payment failed:", result.error.message)
-      alert("Payment failed: " + result.error.message)
-    } else {
-
-      navigate(`/payment/success?session_id=${result.paymentIntent?.id}`)
+        if (result.error) {
+          console.error("Payment failed:", result.error.message)
+          alert("Payment failed: " + result.error.message)
+        } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+          // Navigate to success page with payment intent ID
+          navigate(`/payment/success?payment_intent_id=${result.paymentIntent.id}`)
+        }
+      } catch (error) {
+        console.error("Payment error:", error)
+        alert("An error occurred during payment processing")
+      }
     }
-  }
 
-  handlePayment()
-}, [lastBooking, stripe, elements, navigate])
-
+    handlePayment()
+  }, [lastBooking, stripe, elements, navigate])
 
   return (
     <div className="card">
