@@ -1,5 +1,5 @@
 
-export type Role = "user" | "organizer" | "admin"
+export type Role = "user"| "admin"
 
 export interface UserDTO {
   _id: string
